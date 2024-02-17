@@ -24,25 +24,26 @@ import java.util.Map;
 
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServletV5 extends HttpServlet {
-    private final Map<String, Object> handlerMappingMap = new HashMap<>();
-    private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
+    private final Map<String, Object> handlerMappingMap = new HashMap<>(); //핸들러(컨트롤러)의 맵핑 정보를 저장하는 Map
+    private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>(); //어댑터의 리스트를 담고있는 리스트
     public FrontControllerServletV5() {
-        initHandlerMappingMap();
-        initHandlerAdapters();
+        initHandlerMappingMap(); //핸들러(컨트롤러)의 맵핑 정보를 저장하는 Map에 v3, v4의 핸들러를 저장
+        initHandlerAdapters(); //어댑터의 리스트를 담고있는 리스트에 v3, v4의 어댑터를 저장
     }
     private void initHandlerMappingMap() {
+        //v3
         handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
 
-        //V4 추가
+        //v4
         handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
         handlerMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
     }
     private void initHandlerAdapters() {
-        handlerAdapters.add(new ControllerV3HandlerAdapter());
-        handlerAdapters.add(new ControllerV4HandlerAdapter()); //V4 추가
+        handlerAdapters.add(new ControllerV3HandlerAdapter()); //v3
+        handlerAdapters.add(new ControllerV4HandlerAdapter()); //V4
     }
 
     @Override
@@ -53,16 +54,16 @@ public class FrontControllerServletV5 extends HttpServlet {
             return;
         }
         MyHandlerAdapter adapter = getHandlerAdapter(handler); //핸들러 어댑터들 중에서 이용 가능한 핸들러 어댑터를 저장
-        ModelView mv = adapter.handle(request, response, handler);
-        MyView view = viewResolver(mv.getViewName());
-        view.render(mv.getModel(), request, response);
+        ModelView mv = adapter.handle(request, response, handler); //선택된 어댑터의 handle 메서드를 통해 ModelView를 반환받고 저장
+        MyView view = viewResolver(mv.getViewName()); //뷰 리졸버를 통해 실제 뷰의 경로를 저장
+        view.render(mv.getModel(), request, response); //뷰를 렌더링
     }
     private Object getHandler(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         return handlerMappingMap.get(requestURI);
     }
     private MyHandlerAdapter getHandlerAdapter(Object handler) { //핸들러 어댑터들 중에서 매개변수로 들어온 핸들러에 대해 지원 가능 핸들러 찾기
-        for (MyHandlerAdapter adapter : handlerAdapters) {
+        for (MyHandlerAdapter adapter : handlerAdapters) { //어댑터 리스트를 통해 알맞는 어댑터를 가져옴
             if (adapter.supports(handler)) {
                 return adapter;
             }

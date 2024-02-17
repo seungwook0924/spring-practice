@@ -21,12 +21,13 @@ public class MyView {
     }
 
     public void render(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        modelToRequestAttribute(model, request);
+        modelToRequestAttribute(model, request); //모델의 내용을 request의 파라미터로 변환
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
         dispatcher.forward(request, response);
     }
 
     private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
         model.forEach((key, value) -> request.setAttribute(key, value)); //모델의 모든 키-밸류를 request의 파라미터로 변환
+        //setAttribute(String name, Object value)
     }
 }

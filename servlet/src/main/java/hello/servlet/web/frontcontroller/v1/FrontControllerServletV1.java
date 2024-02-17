@@ -14,11 +14,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*")
+@WebServlet(name = "frontControllerServletV1", urlPatterns = "/front-controller/v1/*") ///front-controller/v1` 를 포함한 하위 모든 요청은 이 서블릿에서 받아들인다.
 public class FrontControllerServletV1 extends HttpServlet {
     private Map<String, ControllerV1> controllerMap = new HashMap<>();
 
     public FrontControllerServletV1() {
+        //맵에 url 경로와 컨트롤러를 저장
         controllerMap.put("/front-controller/v1/members/new-form", new MemberFormControllerV1());
         controllerMap.put("/front-controller/v1/members/save", new MemberSaveControllerV1());
         controllerMap.put("/front-controller/v1/members", new MemberListControllerV1());
@@ -34,7 +35,6 @@ public class FrontControllerServletV1 extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND); //404 에러
             return;
         }
-        
         controller.process(request, response); //해당 컨트롤러에 있는 process 메소드 호출
     }
 }
