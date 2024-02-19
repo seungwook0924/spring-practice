@@ -34,7 +34,6 @@ public class RequestParamController {
      * @ResponseBody 추가
      * - View 조회를 무시하고, HTTP message body에 직접 해당 내용 입력
      */
-
     @ResponseBody //View 조회를 무시하고, HTTP message body에 직접 해당 내용 입력
     @RequestMapping("/request-param-v2")
     public String requestParamV2(@RequestParam("username") String memberName, @RequestParam("age") int memberAge){
@@ -133,9 +132,7 @@ public class RequestParamController {
     @ResponseBody
     @RequestMapping("/model-attribute-v2")
     public String modelAttributeV2(HelloData helloData) {
-        log.info("username={}, age={}", helloData.getUsername(),
-                helloData.getAge());
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
-
 }

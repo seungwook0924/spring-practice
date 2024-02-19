@@ -16,8 +16,13 @@ import java.util.Locale;
 @RestController
 public class RequestHeaderController {
     @RequestMapping("/headers")
-    public String headers(HttpServletRequest request, HttpServletResponse response, HttpMethod httpMethod, Locale locale, @RequestHeader MultiValueMap<String, String> headerMap,
-                          @RequestHeader("host") String host, @CookieValue(value = "myCookie", required = false) String cookie){
+    public String headers(HttpServletRequest request,
+                          HttpServletResponse response,
+                          HttpMethod httpMethod,
+                          Locale locale,
+                          @RequestHeader MultiValueMap<String, String> headerMap,
+                          @RequestHeader("host") String host,
+                          @CookieValue(value = "myCookie", required = false) String cookie){
 
         log.info("request={}", request);
         log.info("response={}", response);
