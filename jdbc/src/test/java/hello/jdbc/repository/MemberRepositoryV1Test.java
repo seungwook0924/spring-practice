@@ -21,12 +21,12 @@ class MemberRepositoryV1Test {
 
     @BeforeEach
     void beforeEach() throws Exception{
-        HikariDataSource dataSource = new HikariDataSource(); //의존성 주입
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(URL);
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);
 
-        repository = new MemberRepositoryV1(dataSource);
+        repository = new MemberRepositoryV1(dataSource); //의존성 주입
     }
 
     @Test
