@@ -17,21 +17,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 트랜잭션 - 트랜잭션 매니저
- */
-class MemberServiceV3_1Test {
+ * 트랜잭션 - 트랜잭션 템플릿 */
+class MemberServiceV3_2Test {
     public static final String MEMBER_A = "memberA";
     public static final String MEMBER_B = "memberB";
     public static final String MEMBER_EX = "ex";
     private MemberRepositoryV3 memberRepository;
-    private MemberServiceV3_1 memberService;
+    private MemberServiceV3_2 memberService;
 
     @BeforeEach
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
         PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         memberRepository = new MemberRepositoryV3(dataSource);
-        memberService = new MemberServiceV3_1(transactionManager,memberRepository);
+        memberService = new MemberServiceV3_2(transactionManager, memberRepository);
     }
 
     @AfterEach
@@ -44,7 +43,6 @@ class MemberServiceV3_1Test {
     @Test
     @DisplayName("정상 이체")
     void accountTransfer() throws SQLException {
-
         //given
         Member memberA = new Member(MEMBER_A, 10000);
         Member memberB = new Member(MEMBER_B, 10000);
@@ -64,6 +62,7 @@ class MemberServiceV3_1Test {
     @Test
     @DisplayName("이체중 예외 발생")
     void accountTransferEx() throws SQLException {
+
         //given
         Member memberA = new Member(MEMBER_A, 10000);
         Member memberEx = new Member(MEMBER_EX, 10000);
@@ -77,7 +76,9 @@ class MemberServiceV3_1Test {
         //then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberEx = memberRepository.findById(memberEx.getMemberId());
-        //memberA의 돈이 롤백 되어야함 assertThat(findMemberA.getMoney()).isEqualTo(10000);
+
+        //memberA의 돈이 롤백 되어야 함
+        assertThat(findMemberA.getMoney()).isEqualTo(10000);
         assertThat(findMemberEx.getMoney()).isEqualTo(10000);
     }
 }
