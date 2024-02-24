@@ -15,7 +15,8 @@ import java.util.NoSuchElementException;
 /**
  * 트랜잭션 - 트랜잭션 매니저
  * DataSourceUtils.getConnection()
- * DataSourceUtils.releaseConnection() */
+ * DataSourceUtils.releaseConnection()
+ */
 @Slf4j
 public class MemberRepositoryV3 {
     private final DataSource dataSource;
@@ -38,7 +39,9 @@ public class MemberRepositoryV3 {
             throw e;
         } finally {
             close(con, pstmt, null);
-        } }
+        }
+    }
+
     public Member findById(String memberId) throws SQLException {
         String sql = "select * from member where member_id = ?";
         Connection con = null;
@@ -63,7 +66,9 @@ public class MemberRepositoryV3 {
             throw e;
         } finally {
             close(con, pstmt, rs);
-        } }
+        }
+    }
+
     public void update(String memberId, int money) throws SQLException {
         String sql = "update member set money=? where member_id=?";
         Connection con = null;
@@ -79,7 +84,9 @@ public class MemberRepositoryV3 {
             throw e;
         } finally {
             close(con, pstmt, null);
-        } }
+        }
+    }
+
     public void delete(String memberId) throws SQLException {
         String sql = "delete from member where member_id=?";
         Connection con = null;
@@ -100,8 +107,8 @@ public class MemberRepositoryV3 {
         //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다. DataSourceUtils.releaseConnection(con, dataSource);
     }
     private Connection getConnection() throws SQLException {
-    //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
-    Connection con = DataSourceUtils.getConnection(dataSource);
-    log.info("get connection={} class={}", con, con.getClass()); return con;
+        //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
+        Connection con = DataSourceUtils.getConnection(dataSource);
+        log.info("get connection={} class={}", con, con.getClass()); return con;
     }
 }
