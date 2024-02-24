@@ -58,8 +58,7 @@ public class MemberRepositoryV3 {
                 member.setMoney(rs.getInt("money"));
                 return member;
             } else {
-                throw new NoSuchElementException("member not found memberId=" +
-                        memberId);
+                throw new NoSuchElementException("member not found memberId=" + memberId);
             }
         } catch (SQLException e) {
             log.error("db error", e);
@@ -104,11 +103,13 @@ public class MemberRepositoryV3 {
         } }
     private void close(Connection con, PreparedStatement pstmt, ResultSet rs) { JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(pstmt);
-        //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다. DataSourceUtils.releaseConnection(con, dataSource);
+        //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
+        DataSourceUtils.releaseConnection(con, dataSource);
     }
     private Connection getConnection() throws SQLException {
         //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
         Connection con = DataSourceUtils.getConnection(dataSource);
-        log.info("get connection={} class={}", con, con.getClass()); return con;
+        log.info("get connection={} class={}", con, con.getClass());
+        return con;
     }
 }

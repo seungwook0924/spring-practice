@@ -19,11 +19,9 @@ public class MemberServiceV3_1 {
     private final PlatformTransactionManager transactionManager;
     private final MemberRepositoryV3 memberRepository;
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
-        //트랜잭션 시작
-        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition()); //트랜잭션 시작
         try {
-            //비즈니스 로직
-            bizLogic(fromId, toId, money);
+            bizLogic(fromId, toId, money); //비즈니스 로직
             transactionManager.commit(status); //성공시 커밋
             } catch (Exception e) {
             transactionManager.rollback(status); //실패시 롤백

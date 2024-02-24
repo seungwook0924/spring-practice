@@ -28,8 +28,7 @@ class MemberServiceV3_1Test {
     @BeforeEach
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
-        PlatformTransactionManager transactionManager = new
-                DataSourceTransactionManager(dataSource);
+        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         memberRepository = new MemberRepositoryV3(dataSource);
         memberService = new MemberServiceV3_1(transactionManager,memberRepository);
     }
@@ -70,12 +69,13 @@ class MemberServiceV3_1Test {
         memberRepository.save(memberA);
         memberRepository.save(memberEx);
         //when
-        assertThatThrownBy(() ->
-                memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(),
-                        2000)).isInstanceOf(IllegalStateException.class);
+        assertThatThrownBy(() -> memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(), 2000))
+                .isInstanceOf(IllegalStateException.class);
+
         //then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberEx = memberRepository.findById(memberEx.getMemberId());
-        //memberA의 돈이 롤백 되어야함 assertThat(findMemberA.getMoney()).isEqualTo(10000); assertThat(findMemberEx.getMoney()).isEqualTo(10000);
+        //memberA의 돈이 롤백 되어야함 assertThat(findMemberA.getMoney()).isEqualTo(10000);
+        assertThat(findMemberEx.getMoney()).isEqualTo(10000);
     }
 }
