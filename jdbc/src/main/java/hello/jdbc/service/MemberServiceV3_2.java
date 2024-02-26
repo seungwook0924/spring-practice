@@ -9,13 +9,13 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.sql.SQLException;
 
 /**
- * 트랜잭션 - 트랜잭션 템플릿 */
+ * 트랜잭션 - 트랜잭션 템플릿
+ */
 @Slf4j
 public class MemberServiceV3_2 {
     private final TransactionTemplate txTemplate;
     private final MemberRepositoryV3 memberRepository;
-    public MemberServiceV3_2(PlatformTransactionManager transactionManager,
-                             MemberRepositoryV3 memberRepository) {
+    public MemberServiceV3_2(PlatformTransactionManager transactionManager, MemberRepositoryV3 memberRepository) {
         this.txTemplate = new TransactionTemplate(transactionManager);
         this.memberRepository = memberRepository;
     }
