@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <!-- base.html로 common_header 라는 이름으로 타이틀과 링크 태그를 파라미터로 넘김 -->
+    <!-- 타이틀 태그와 링크 태그를 파라미터로 넘길 수 있음 -->
+    <head th:replace="template/layout/base :: common_header(~{::title},~{::link})">
+        <title>메인 타이틀</title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}">
+    </head>
+    <body> 메인 컨텐츠 </body>
+</html>

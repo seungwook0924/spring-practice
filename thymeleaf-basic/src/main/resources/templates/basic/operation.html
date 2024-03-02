@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <ul>
+            <li>산술 연산
+                <ul>
+                    <li>10 + 2 = <span th:text="10 + 2"></span></li>
+                    <li>10 % 2 == 0 = <span th:text="10 % 2 == 0"></span></li>
+                </ul>
+            </li>
+            <li>비교 연산
+                <ul>
+                    <!-- > (gt), < (lt), >= (ge), <= (le), ! (not), == (eq), != (neq, ne) -->
+                    <li>1 > 10 = <span th:text="1 &gt; 10"></span></li> <!-- HTML 문서에서 > 기호를 표시하고 싶을 때는 &gt;를 사용 -->
+                    <li>1 gt 10 = <span th:text="1 gt 10"></span></li> <!-- 첫 번째 피연산자가 두 번째 피연산자보다 클 경우 참(true)을 반환 -->
+                    <li>1 >= 10 = <span th:text="1 >= 10"></span></li>
+                    <li>1 ge 10 = <span th:text="1 ge 10"></span></li> <!-- 첫 번째 피연산자가 두 번째 피연산자보다 크거나 같을 경우 참을 반환 -->
+                    <li>1 == 10 = <span th:text="1 == 10"></span></li>
+                    <li>1 != 10 = <span th:text="1 != 10"></span></li>
+                </ul>
+            </li>
+            <li>조건식
+                <ul>
+                    <li>(10 % 2 == 0)? '짝수':'홀수' = <span th:text="(10 % 2 == 0)? '짝 수':'홀수'"></span></li> <!-- 삼항 연산자 -->
+                </ul>
+            </li>
+            <li>Elvis 연산자
+                <ul>
+                    <li>${data}?: '데이터가 없습니다.' = <span th:text="${data}?: '데이터가 없습니다.'"></span></li> <!-- 삼항 연산자 축약 버전 -->
+                    <li>${nullData}?: '데이터가 없습니다.' = <span th:text="${nullData}?: '데이터가 없습니다.'"></span></li> <!-- 변수의 값이 null 일 경우 거짓 처리 -->
+                </ul>
+            </li>
+            <li>No-Operation
+                <ul>
+                    <li>${data}?: _ = <span th:text="${data}?: _">데이터가 없습니다.</span></li>
+                    <li>${nullData}?: _ = <span th:text="${nullData}?: _">데이터가 없습니다.</span></li> <!-- 변수의 값이 null 일 경우  _를 통해 타임리프 문법 무효화 -->
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

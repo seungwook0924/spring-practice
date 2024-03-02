@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- common_header 를 호출해서 이 페이지의 title 태그와 link 태그를 대체함 -->
+<!-- title 과 links 는 단순 파라미터 이름 -->
+<head th:fragment="common_header(title,links)">
+    <title th:replace="${title}">레이아웃 타이틀</title>
+
+    <!-- 공통 -->
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/awesomeapp.css}">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}">
+    <script type="text/javascript" th:src="@{/sh/scripts/codebase.js}"></script>
+
+    <!-- 추가 -->
+    <th:block th:replace="${links}" />
+</head>

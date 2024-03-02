@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!-- layoutFile.html로 layout 라는 이름으로 타이틀과 섹션 태그를 파라미터로 넘김 -->
+<!-- 타이틀 태그와 섹션 태그를 파라미터로 넘길 수 있음 -->
+<html th:replace="~{template/layoutExtend/layoutFile :: layout(~{::title},~{::section})}" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>메인 페이지 타이틀</title>
+    </head>
+    <body>
+        <section>
+            <p>메인 페이지 컨텐츠</p>
+            <div>메인 페이지 포함 내용</div>
+        </section>
+    </body>
+</html>

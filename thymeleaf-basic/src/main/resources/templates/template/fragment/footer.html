@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <footer th:fragment="copy"> <!-- 이렇게 설정하면 함수 쓰듯이 copy 라는 이름으로 호출할 수 있다. (템플릿 조각) -->
+            푸터 자리 입니다.
+        </footer>
+
+        <footer th:fragment="copyParam (param1, param2)"> <!-- copyParam 라는 이름으로 파라미터를 사용할 수 있게 해준다.(템플릿 조각) -->
+            <p>파라미터 자리 입니다.</p>
+            <p th:text="${param1}"></p>
+            <p th:text="${param2}"></p>
+        </footer>
+    </body>
+</html>

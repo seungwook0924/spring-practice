@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!-- layout 을 호출해서 이 페이지의 title 태그와 div 태그를 대체함 -->
+<!-- title->title, div->section 으로 대체 -->
+<!-- title 과 content 는 단순 파라미터 이름 -->
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:replace="${title}">레이아웃 타이틀</title>
+    </head>
+    <body>
+        <h1>레이아웃 H1</h1>
+        <div th:replace="${content}">
+            <p>레이아웃 컨텐츠</p>
+        </div>
+        <footer> 레이아웃 푸터 </footer>
+    </body>
+</html>
