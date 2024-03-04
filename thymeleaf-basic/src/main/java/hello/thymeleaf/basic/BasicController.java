@@ -66,6 +66,12 @@ public class BasicController {
         return "basic/basic-objects";
     }
 
+//    @GetMapping("/basic-objects")
+//    public String basicObjects(HttpSession session) {
+//        session.setAttribute("sessionData", "Hello Session");
+//        return "basic/basic-objects";
+//    }
+
     @Component("helloBean")
     static class HelloBean {
         public String hello(String data) {
@@ -141,6 +147,4 @@ public class BasicController {
         addUsers(model);
         return "basic/javascript";
     }
-
-
 }
