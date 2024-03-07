@@ -220,7 +220,7 @@ public class ValidationItemControllerV2 {
 //        //errorArgs : 오류 메시지에서 {0} 을 치환하기 위한 값
 //        //defaultMessage : 오류 메시지를 찾을 수 없을 때 사용하는 기본 메시지
 //
-//       ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
 //
 //        if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
 //            bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null);
@@ -303,6 +303,5 @@ public class ValidationItemControllerV2 {
         itemRepository.update(itemId, item);
         return "redirect:/validation/v2/items/{itemId}";
     }
-
 }
 
