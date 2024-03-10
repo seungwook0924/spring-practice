@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <link th:href="@{/css/bootstrap.min.css}"
+              href="../css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .container {
+                max-width: 560px;
+            }
+
+            /*에러 발생시 빨강색으로 랜더링*/
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+
+            <div class="py-5 text-center">
+                <h2 th:text="#{page.addItem}">상품 등록</h2>
+            </div>
+
+            <form action="item.html" th:action th:object="${item}" method="post">
+                <!-- bindingResult 에 ObjectError 의 전체 오류 메시지 출력 -->
+                <div th:if="${#fields.hasGlobalErrors()}"> <!-- field 가 global 오류가 있다면 -->
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p> <!-- 오류의 내용을 순차적으로 출력 -->
+                </div>
+
+                <div>
+                    <label for="itemName" th:text="#{label.item.itemName}">상품명</label>
+
+                    <!-- text 박스 관련 -->
+                    <!-- field 에 itemName 오류가 있으면 class = field-error -->
+                    <input type="text" id="itemName" th:field="*{itemName}"
+                           th:errorclass="field-error" class="form-control" placeholder="이름을 입력하세요"> <!-- itemname 에 해당하는 오류가 있다면 class에 field-error 추가 -->
+
+                    <!-- 오류시 text 박스 아래 레이블 관련 -->
+                    <!-- field 에 맞는 defaultMessage 가 출력됨 -->
+                    <div class="field-error" th:errors="*{itemName}"> <!-- field 의 itemName 에 해당하는 오류가 있다면 오류 출력 -->
+                        상품명 오류
+                    </div>
+                </div>
+
+                <div>
+                    <label for="price" th:text="#{label.item.price}">가격</label>
+
+                    <!-- text 박스 관련 -->
+                    <!-- field 에 price 오류가 있으면 class = field-error -->
+                    <input type="text" id="price" th:field="*{price}"
+                           th:errorclass="field-error" class="form-control" placeholder="가격을 입력하세요"> <!-- price 에 해당하는 오류가 있다면 class에 field-error 추가 -->
+
+                    <!-- 오류시 text 박스 아래 레이블 관련 -->
+                    <!-- field 에 맞는 defaultMessage 가 출력됨 -->
+                    <div class="field-error" th:errors="*{price}"> <!-- field 의 price 에 해당하는 오류가 있다면 오류 출력 -->
+                        가격 오류
+                    </div>
+                </div>
+
+                <div>
+                    <label for="quantity" th:text="#{label.item.quantity}">수량</label>
+
+                    <!-- text 박스 관련 -->
+                    <!-- field 에 price 오류가 있으면 class = field-error -->
+                    <input type="text" id="quantity" th:field="*{quantity}"
+                           th:errorclass="field-error" class="form-control" placeholder="수량을 입력하세요"> <!-- quantity 에 해당하는 오류가 있다면 class에 field-error 추가 -->
+
+                    <!-- 오류시 text 박스 아래 레이블 관련 -->
+                    <!-- field 에 맞는 defaultMessage 가 출력됨 -->
+                    <div class="field-error" th:errors="*{quantity}"> <!-- quantity 의 price 에 해당하는 오류가 있다면 오류 출력 -->
+                        수량 오류
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <div class="row">
+                    <div class="col">
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.save}">상품 등록</button>
+                    </div>
+                    <div class="col">
+                        <button class="w-100 btn btn-secondary btn-lg"
+                                onclick="location.href='items.html'"
+                                th:onclick="|location.href='@{/validation/v4/items}'|"
+                                type="button" th:text="#{button.cancel}">취소</button>
+                    </div>
+                </div>
+            </form>
+        </div> <!-- /container -->
+    </body>
+</html>
