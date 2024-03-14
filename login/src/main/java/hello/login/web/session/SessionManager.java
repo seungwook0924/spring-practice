@@ -11,7 +11,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 세션 관리 */
+ * 세션 관리
+ */
 @Component
 public class SessionManager {
     public static final String SESSION_COOKIE_NAME = "mySessionId";
@@ -64,8 +65,10 @@ public class SessionManager {
         if (request.getCookies() == null) {
             return null;
         }
+
         return Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().equals(cookieName))
                 .findAny()
                 .orElse(null);
-    } }
+    }
+}
