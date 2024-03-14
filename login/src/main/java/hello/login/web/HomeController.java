@@ -27,10 +27,12 @@ public class HomeController {
         }
 
         //로그인
-        Member loginMember = memberRepository.findById(memberId); if (loginMember == null) {
+        Member loginMember = memberRepository.findById(memberId);
+        if (loginMember == null) {
             return "home";
         }
 
+        //쿠키가 유효하다면
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
