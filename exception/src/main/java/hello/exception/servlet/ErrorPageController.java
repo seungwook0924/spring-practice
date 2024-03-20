@@ -1,10 +1,17 @@
 package hello.exception.servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,6 +37,18 @@ public class ErrorPageController {
         log.info("errorPage 500");
         printErrorInfo(request);
         return "error-page/500";
+    }
+
+    @RequestMapping(value = "/error-page/500", produces = MediaType.APPLICATION_JSON_VALUE) //같은 URL 매핑이어도 더 자세하기 떄문에 우선순위 높음
+    public ResponseEntity<Map<String, Object>> errorPage500Api(HttpServletRequest request, HttpServletResponse response) {
+        log.info("API errorPage 500");
+
+        Map<String, Object> result = new HashMap<>();
+        Exception ex = (Exception) request.getAttribute(ERROR_EXCEPTION); //요청에서 발생한 예외 객체를 추출
+        result.put("status", request.getAttribute(ERROR_STATUS_CODE)); //예외 발생 시의 HTTP 상태 코드를 결과를 맵에 추가
+        result.put("message", ex.getMessage()); //발생한 예외의 메시지를 결과를 맵에 추가
+        Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE); //요청에서 오류 상태 코드를 추출
+        return new ResponseEntity(result, HttpStatus.valueOf(statusCode)); //결과 맵과 HTTP 상태 코드를 사용하여 ResponseEntity 객체를 생성하고 반환, 이 객체는 스프링 MVC에 의해 JSON 형식으로 클라이언트에게 전송
     }
 
     private void printErrorInfo(HttpServletRequest request) {
