@@ -1,5 +1,7 @@
 package hello.exception.exhandler.advice;
 
+import hello.exception.api.ApiExceptionController;
+import hello.exception.api.ApiExceptionV3Controller;
 import hello.exception.exception.UserException;
 import hello.exception.exhandler.ErrorResult;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice(assignableTypes = ApiExceptionV3Controller.class) //@ControllerAdvice에 추가적으로 @ResponseBody 어노테이션의 기능이 포함, ApiExceptionV3Controller 클래스에만 적용
 public class ExControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
