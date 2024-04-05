@@ -43,7 +43,7 @@ public class TxBasicTest {
     @Transactional(readOnly = true)
     static class BasicService {
 
-        //우선순위는 항상 **더 구체적이고 자세한 것이 높은 우선순위를 가진다.
+        //우선순위는 항상 더 구체적이고 자세한 것이 높은 우선순위를 가진다.
         //클래스 레벨에서 (readOnly = true)이지만 메서드 레벨에서 (readOnly = false) 이기때문에 tx()는 읽기 작업과 쓰기 작업 모두 할 수 있다.
         //(readOnly = true) : 읽기만 가능
         //(readOnly = false) : 읽기. 쓰기 모두 가능
