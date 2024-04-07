@@ -40,12 +40,15 @@ public class InternalCallV1Test {
 
     @Slf4j
     static class CallService {
+
+        //외부 메서드는 트랜잭션 어노테이션이 없다.
         public void external() {
             log.info("call external");
             printTxInfo();
             internal(); //외부에서 @Transactional 이 붙은 메서드를 실행하면 트랜잭션이 적용되지 않는다. -> 따로 클래스를 만들어야 한다.
         }
 
+        //내부 메서드는 트랜잭션 어노테이션이 있다.
         @Transactional
         public void internal() {
             log.info("call internal");
@@ -53,8 +56,7 @@ public class InternalCallV1Test {
         }
 
         private void printTxInfo() {
-            boolean txActive =
-                    TransactionSynchronizationManager.isActualTransactionActive();
+            boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
             log.info("tx active={}", txActive);
         }
     }
