@@ -139,5 +139,5 @@ public class BasicTxTest {
 
         log.info("외부 트랜잭션 커밋");
         txManager.commit(outer); //커밋
-        }
+    }
 }
