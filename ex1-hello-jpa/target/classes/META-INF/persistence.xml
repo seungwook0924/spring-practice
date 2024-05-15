@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- JPA 설정 파일의 루트 엘리먼트로, JPA 버전과 네임스페이스를 정의 -->
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    <!-- 하나의 영속성 유닛을 정의, 여기서 이름은 "hello"로 설정 -->
+    <persistence-unit name="hello">
+        <properties>
+            <!-- 필수 속성들 -->
+            <!-- JDBC 드라이버 클래스 이름을 지정, 여기서는 H2 데이터베이스 드라이버 -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <!-- 데이터베이스 접속 사용자 이름을 지정, 기본값은 "sa" -->
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <!-- 데이터베이스 접속 비밀번호를 지정, 여기서는 비어 있음 -->
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <!-- 데이터베이스 접속 URL을 지정, H2 데이터베이스의 test 데이터베이스에 접속 -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/test"/>
+            <!-- Hibernate 방언(dialect)을 지정, 여기서는 H2 데이터베이스에 맞는 방언 사용 -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+
+            <!-- 옵션 속성들 -->
+            <!-- 실행되는 SQL 쿼리를 콘솔에 출력할지 여부를 설정, true로 설정 시 콘솔에 출력 -->
+            <property name="hibernate.show_sql" value="true"/>
+            <!-- 출력되는 SQL 쿼리를 포맷하여 가독성을 높일지 여부를 설정 -->
+            <property name="hibernate.format_sql" value="true"/>
+            <!-- SQL 쿼리에 주석을 추가할지 여부를 설정 -->
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <!-- 애플리케이션 시작 시 데이터베이스 스키마를 생성하거나 업데이트하는 방법을 설정 -->
+            <!-- create로 설정 시 기존 스키마를 삭제하고 새로 생성 -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+    </persistence-unit>
+</persistence>
+
