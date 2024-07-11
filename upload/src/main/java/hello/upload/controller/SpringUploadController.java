@@ -1,6 +1,6 @@
 package hello.upload.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,9 +26,8 @@ public class SpringUploadController {
 
     }
     @PostMapping("/upload")
-    public String saveFile(@RequestParam String itemName,
-                           @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
-        log.info("request={}", request);
+    public String saveFile(@RequestParam String itemName, @RequestParam MultipartFile file) throws IOException {
+
         log.info("itemName={}", itemName);
         log.info("multipartFile={}", file);
 

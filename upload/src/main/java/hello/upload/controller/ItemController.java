@@ -58,6 +58,7 @@ public class ItemController {
     }
 
     //@GetMapping("/images/{filename}") : <img> 태그로 이미지를 조회할 때 사용한다.
+    //UrlResource 로 이미지 파일을 읽어서 @ResponseBody 로 이미지 바이너리를 반환
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
