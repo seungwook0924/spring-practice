@@ -24,13 +24,6 @@ public class MemberServiceV4 {
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
         memberRepository.update(fromId, fromMember.getMoney() - money);
-//        try { 예외 처리
-//            memberRepository.update(fromId, fromMember.getMoney() - money);
-//        }
-//        catch (DuplicateKeyException e) -> 스프링에서 제공하는 예외처리로 처리
-//        {
-//            //복구
-//        }
         validation(toMember);
         memberRepository.update(toId, toMember.getMoney() + money);
     }

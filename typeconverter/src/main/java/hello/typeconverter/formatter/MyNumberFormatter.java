@@ -13,11 +13,14 @@ public class MyNumberFormatter implements Formatter<Number> {
     public Number parse(String text, Locale locale) throws ParseException {
         log.info("text={}, locale={}", text, locale);
         NumberFormat format = NumberFormat.getInstance(locale);
+        //Number parse = format.parse(text);
         return format.parse(text);
     }
     @Override
     public String print(Number object, Locale locale) {
         log.info("object={}, locale={}", object, locale);
+        //NumberFormat instance = NumberFormat.getInstance(locale);
+        //String format = instance.format(object);
         return NumberFormat.getInstance(locale).format(object);
     }
 }
