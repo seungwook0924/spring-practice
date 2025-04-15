@@ -11,7 +11,7 @@ public class TimeAdvice implements MethodInterceptor {
         log.info("TimeProxy 실행");
         long startTime = System.currentTimeMillis();
 
-        Object result = invocation.proceed();
+        Object result = invocation.proceed(); // target 클래스를 호출하고 그 결과를 받는다.
 
         long endTime = System.currentTimeMillis();
         long resultTime = endTime - startTime;

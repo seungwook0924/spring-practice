@@ -20,7 +20,7 @@ public class ProxyFactoryTest {
     void interfaceProxy() {
         ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(target);
-        proxyFactory.addAdvice(new TimeAdvice());
+        proxyFactory.addAdvice(new TimeAdvice()); // 프록시가 사용할 부가기능 로직을 설정
         ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
         log.info("targetClass={}", target.getClass());
         log.info("proxyClass={}", proxy.getClass());
@@ -54,7 +54,7 @@ public class ProxyFactoryTest {
     void proxyTargetClass() {
         ServiceInterface target = new ServiceImpl();
         ProxyFactory proxyFactory = new ProxyFactory(target);
-        proxyFactory.setProxyTargetClass(true);
+        proxyFactory.setProxyTargetClass(true); // CGLIB 사용
         proxyFactory.addAdvice(new TimeAdvice());
         ServiceInterface proxy = (ServiceInterface) proxyFactory.getProxy();
         log.info("targetClass={}", target.getClass());
